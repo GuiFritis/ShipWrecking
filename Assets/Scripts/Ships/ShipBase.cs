@@ -3,18 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Ship{
+    [RequireComponent(typeof(Rigidbody2D), typeof(HealthBase))]
     public class ShipBase : MonoBehaviour
     {
-        [SerializeField]
-        private Rigidbody2D rigdbody;
-        [SerializeField]
-        private float speed = 5f;
-        [SerializeField]
-        private float turnSpeed = 5f;
+        public Rigidbody2D rigdbody;
+        public HealthBase health;
+        public SpriteRenderer spriteRenderer;
+        [Header("Movement")]
+        public float speed = 5f;
+        public float turnSpeed = 5f;
+        [Header("Art")]
+        public List<ShipSpriteSetup> spriteSetups;
 
         void OnValidate()
         {
             rigdbody = GetComponent<Rigidbody2D>();
+            health = GetComponent<HealthBase>();
+        }
+
+        private void Init()
+        {
+            health.OnDamage += OnDamage;
+        }
+
+        private void OrderSpriteSetups()
+        {
+            spriteSetups.Sort((i, z) => i.healthPercentage - z.healthPercentage);
         }
         
         public void MoveForward()
@@ -26,5 +40,26 @@ namespace Ship{
         {
             transform.Rotate(Vector3.forward * turnSpeed);
         }
+
+        private void OnDamage(HealthBase hp)
+        {
+            Sprite sprite = spriteRenderer.sprite;
+            foreach (var item in spriteSetups)
+            {
+                if(hp.GetHealthPercentage() <= item.healthPercentage)
+                {
+                    sprite = item.sprite;
+                }
+            }
+            spriteRenderer.sprite = sprite;
+        }
+    }
+
+    [System.Serializable]
+    public class ShipSpriteSetup
+    {
+        [Range(0, 100)]
+        public int healthPercentage = 100;
+        public Sprite sprite;
     }
 }

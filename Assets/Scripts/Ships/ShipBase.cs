@@ -21,9 +21,15 @@ namespace Ship{
             health = GetComponent<HealthBase>();
         }
 
+        void Awake()
+        {
+            Init();
+        }
+
         private void Init()
         {
             health.OnDamage += OnDamage;
+            OrderSpriteSetups();
         }
 
         private void OrderSpriteSetups()

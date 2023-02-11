@@ -6,18 +6,21 @@ namespace Ship{
     [RequireComponent(typeof(Rigidbody2D), typeof(HealthBase))]
     public class ShipBase : MonoBehaviour
     {
-        public Rigidbody2D rigdbody;
         public HealthBase health;
         public SpriteRenderer spriteRenderer;
         [Header("Movement")]
-        public float speed = 5f;
         public float turnSpeed = 5f;
+        public float friction = 15f;
+        public bool moving = false;
+        public float acceleration = 10f;
+        public float maxSpeed = 10f;
         [Header("Art")]
         public List<ShipSpriteSetup> spriteSetups;
 
+        private float _speed = 0f;
+
         void OnValidate()
         {
-            rigdbody = GetComponent<Rigidbody2D>();
             health = GetComponent<HealthBase>();
         }
 
@@ -26,6 +29,7 @@ namespace Ship{
             Init();
         }
 
+        #region INIT
         private void Init()
         {
             health.OnDamage += OnDamage;
@@ -36,15 +40,31 @@ namespace Ship{
         {
             spriteSetups.Sort((i, z) => i.healthPercentage - z.healthPercentage);
         }
-        
-        public void MoveForward()
+        #endregion
+
+        void Update()
         {
-            rigdbody.AddForce(transform.up * speed);
+            Move();
+        }
+
+        public void Move()
+        {
+            if(moving)
+            {
+                _speed = Mathf.Min(_speed + acceleration * Time.deltaTime, maxSpeed);
+            }
+            else //friction
+            {
+                _speed = Mathf.Max(_speed - friction * Time.deltaTime, 0);
+            }
+            if(_speed > 0){
+                transform.Translate(Vector2.up * -1 * _speed * Time.deltaTime);
+            }
         }
 
         public void Turn(int direction)
         {
-            transform.Rotate(Vector3.forward * turnSpeed);
+            transform.Rotate(Vector3.forward * turnSpeed * direction);
         }
 
         private void OnDamage(HealthBase hp)

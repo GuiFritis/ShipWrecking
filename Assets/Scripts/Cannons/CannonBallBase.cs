@@ -19,12 +19,12 @@ public class CannonBallBase : MonoBehaviour
 
     void Start()
     {
-        Destroy(this, lifeTime);
+        Destroy(gameObject, lifeTime);
     }
 
     void Update()
     {
-        transform.Translate(Vector2.up * -1 * speed * Time.deltaTime);
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -36,11 +36,12 @@ public class CannonBallBase : MonoBehaviour
             {
                 hp.TakeDamage(damage);
             }
+
             if(hit_vfx != null)
             {
                 Instantiate(hit_vfx, transform.position, transform.rotation);
             }
-            Destroy(this);
+            Destroy(gameObject);
         }
         
     }

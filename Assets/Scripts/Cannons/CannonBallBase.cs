@@ -29,7 +29,7 @@ public class CannonBallBase : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(((1<<other.gameObject.layer) & hitLayer) != 0)
+        if(((1 << other.gameObject.layer) & hitLayer.value) > 0)
         {
             HealthBase hp = other.GetComponent<HealthBase>();
             if(hp != null)

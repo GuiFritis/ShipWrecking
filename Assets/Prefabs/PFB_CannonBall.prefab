@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5799792532789062019}
   - component: {fileID: 5799792532789062018}
+  - component: {fileID: 5799792532789061759}
   - component: {fileID: 5799792532789062017}
   - component: {fileID: 5799792532789062016}
-  - component: {fileID: 5799792532789061759}
+  - component: {fileID: 6500188717514945859}
   m_Layer: 0
   m_Name: PFB_CannonBall
   m_TagString: Untagged
@@ -87,6 +88,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5799792532789061759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5799792532789061758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd7f02bdf7cd8e5439aa1efbcf753db9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 4
+  lifeTime: 1
+  damage: 10
+  hit_vfx: {fileID: 2464671007351807661, guid: f6fa6cbe7d217c548a78407a6b81cd4e, type: 3}
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 640
 --- !u!58 &5799792532789062017
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -202,22 +222,24 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &5799792532789061759
-MonoBehaviour:
+--- !u!50 &6500188717514945859
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5799792532789061758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd7f02bdf7cd8e5439aa1efbcf753db9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 4
-  lifeTime: 1
-  damage: 10
-  hit_vfx: {fileID: 2464671007351807661, guid: f6fa6cbe7d217c548a78407a6b81cd4e, type: 3}
-  hitLayer:
-    serializedVersion: 2
-    m_Bits: 640
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

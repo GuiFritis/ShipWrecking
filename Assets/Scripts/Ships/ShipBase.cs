@@ -15,7 +15,7 @@ namespace Ship{
         public float acceleration = 10f;
         public float maxSpeed = 10f;
         [Header("Art")]
-        public List<ShipSpriteSetup> spriteSetups;
+        public List<SetupSpriteByHealth> spriteSetups;
 
         private float _speed = 0f;
 
@@ -79,13 +79,5 @@ namespace Ship{
             }
             spriteRenderer.sprite = sprite;
         }
-    }
-
-    [System.Serializable]
-    public class ShipSpriteSetup
-    {
-        [Range(0, 100)]
-        public int healthPercentage = 100;
-        public Sprite sprite;
     }
 }

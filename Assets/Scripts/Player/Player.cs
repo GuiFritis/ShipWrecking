@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
 
     private void Init()
     {
+        ship.health.ResetLife();
+
         _inputs = new Inputs();
         _inputs.Enable();
         SetInputs();

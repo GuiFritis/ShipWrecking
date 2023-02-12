@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 8308601091339584454}
   - component: {fileID: 8308601091339584455}
   - component: {fileID: 8308601091339584452}
+  - component: {fileID: 1235170376}
   m_Layer: 6
   m_Name: PFB_Player
   m_TagString: Untagged
@@ -289,7 +290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: {fileID: 8308601091339584454}
   spriteRenderer: {fileID: 8308601089971069861}
-  turnSpeed: 2
+  turnSpeed: 0.7
   friction: 5
   moving: 0
   acceleration: 1
@@ -325,6 +326,22 @@ MonoBehaviour:
   - {fileID: 3402976359248524110}
   - {fileID: 5519339858334879367}
   - {fileID: 1130797382219719877}
+--- !u!114 &1235170376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8308601091339584448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9378c91cfdeab1943ac31dba76b9adc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cinemachine: {fileID: 0}
+  fogTag: Fog
+  fogView: 3.5
+  transitionTime: 0.7
 --- !u!1001 &217685140948563247
 PrefabInstance:
   m_ObjectHideFlags: 0

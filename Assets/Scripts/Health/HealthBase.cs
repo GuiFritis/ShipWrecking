@@ -55,3 +55,11 @@ public class HealthBase : MonoBehaviour
         return (_curHealth/baseHealth)*100;
     }
 }
+
+[System.Serializable]
+public class SetupSpriteByHealth
+{
+    [Range(0, 100)]
+    public int healthPercentage = 100;
+    public Sprite sprite;
+}

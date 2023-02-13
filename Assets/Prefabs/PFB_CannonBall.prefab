@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd7f02bdf7cd8e5439aa1efbcf753db9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
-  lifeTime: 1
+  speed: 4.5
+  lifeTime: 1.5
   damage: 2
   hit_vfx: {fileID: 2464671007351807661, guid: f6fa6cbe7d217c548a78407a6b81cd4e, type: 3}
   hitLayer:

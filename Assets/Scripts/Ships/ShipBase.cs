@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cannon;
 
 namespace Ship{
     [RequireComponent(typeof(Rigidbody2D), typeof(HealthBase))]
@@ -8,12 +9,14 @@ namespace Ship{
     {
         public HealthBase health;
         public SpriteRenderer spriteRenderer;
+        [Space]
+        public List<CannonBase> cannons = new List<CannonBase>();
         [Header("Movement")]
-        public float turnSpeed = 5f;
-        public float friction = 15f;
+        public float turnSpeed = 1f;
+        public float friction = 5f;
         public bool moving = false;
-        public float acceleration = 10f;
-        public float maxSpeed = 10f;
+        public float acceleration = 1f;
+        public float maxSpeed = 2.5f;
         [Header("Art")]
         public List<SetupSpriteByHealth> spriteSetups;
 
@@ -65,6 +68,20 @@ namespace Ship{
         public void Turn(int direction)
         {
             transform.Rotate(Vector3.forward * turnSpeed * direction);
+        }
+
+        public void ShootCannon(CannonSide side)
+        {
+            if(cannons.Count > 0)
+            {
+                foreach (var item in cannons)
+                {
+                    if(item.side == side)
+                    {
+                        item.Shoot();
+                    }
+                }
+            }
         }
 
         private void OnDamage(HealthBase hp)

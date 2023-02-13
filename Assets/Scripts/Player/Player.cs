@@ -8,9 +8,6 @@ using Ship;
 public class Player : MonoBehaviour
 {
     public ShipBase ship;
-    public CannonBase frontCannon;
-    public CannonBase[] leftCannon = new CannonBase[3];
-    public CannonBase[] rightCannon = new CannonBase[3];
 
     private Inputs _inputs;
     private bool _turning;
@@ -83,23 +80,17 @@ public class Player : MonoBehaviour
     #region CANNONS
     private void FrontCannons()
     {
-        frontCannon.Shoot();
+        ship.ShootCannon(Cannon.CannonSide.FRONT);
     }
 
     private void LeftSideCannons()
     {
-        foreach (var item in leftCannon)
-        {
-            item.Shoot();
-        }
+        ship.ShootCannon(Cannon.CannonSide.LEFT);
     }
 
     private void RightSideCannons()
     {
-        foreach (var item in rightCannon)
-        {
-            item.Shoot();
-        }
+        ship.ShootCannon(Cannon.CannonSide.RIGHT);
     }
 
     private void SideCannons()

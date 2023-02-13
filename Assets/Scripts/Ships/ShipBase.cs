@@ -14,13 +14,13 @@ namespace Ship{
         [Header("Movement")]
         public float turnSpeed = 1f;
         public float friction = 5f;
-        public bool moving = false;
         public float acceleration = 1f;
         public float maxSpeed = 2.5f;
         [Header("Art")]
         public List<SetupSpriteByHealth> spriteSetups;
 
-        private float _speed = 0f;
+        protected float _speed = 0f;
+        protected bool _moving = false;
 
         void OnValidate()
         {
@@ -52,7 +52,7 @@ namespace Ship{
 
         public void Move()
         {
-            if(moving)
+            if(_moving)
             {
                 _speed = Mathf.Min(_speed + acceleration * Time.deltaTime, maxSpeed);
             }
@@ -95,6 +95,11 @@ namespace Ship{
                 }
             }
             spriteRenderer.sprite = sprite;
+        }
+
+        public void SetMoving(bool moving)
+        {
+            _moving = moving;
         }
     }
 }

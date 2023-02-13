@@ -10,6 +10,9 @@ namespace Enemy
         public HealthBase health;
         public GameObject deathVFX;
 
+        public abstract void WakeUp();
+        public abstract void Sleep();
+
         void Awake()
         {
             Init();

@@ -46,12 +46,12 @@ public class Player : MonoBehaviour
     #region MOVE
     private void Move()
     {
-        ship.moving = true;
+        ship.SetMoving(true);
     }
 
     private void StopMove()
     {
-        ship.moving = false;
+        ship.SetMoving(false);
     }
     #endregion
 

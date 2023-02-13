@@ -10,9 +10,9 @@ namespace Ship
     {
         [Header("Seeking")]
         public Seeker seeker;
-        public Player target;
+        public Transform target;
         public float distanceToNextWaypoint = 3f;
-        public float distanceToShoot = 5f;
+        public float distanceToDestination = 5f;
 
         private Path _path;
         private int _currentWaypoint = 0;
@@ -25,11 +25,6 @@ namespace Ship
             seeker = GetComponent<Seeker>();
         }
 
-        void Start()
-        {
-            CalculatePath();
-        }
-
         void Update()
         {
             if(_path != null && !_destinationReached)
@@ -39,9 +34,9 @@ namespace Ship
             }
         }
 
-        private void CalculatePath()
+        public void CalculatePath()
         {
-            seeker.StartPath(transform.position, target.transform.position, OnPathGenerated);
+            seeker.StartPath(transform.position, target.position, OnPathGenerated);
         }
 
         private void OnPathGenerated(Path path)
@@ -58,7 +53,6 @@ namespace Ship
             if(_currentWaypoint < _path.vectorPath.Count)
             {
                 _destinationReached = false;
-                moving = true;
 
                 _direction = _path.vectorPath[_currentWaypoint] - transform.position;
                 _direction.Normalize();
@@ -74,10 +68,21 @@ namespace Ship
                 {
                     _currentWaypoint++;
                 }
+
+                if(Vector2.Distance(transform.position, _path.vectorPath[_path.vectorPath.Count-1]) <= distanceToDestination)
+                {
+                    _currentWaypoint = _path.vectorPath.Count;
+                    _moving = false;
+                    _destinationReached = true;
+                }
+                else
+                {
+                    _moving = true;
+                }
             }
             else
             {
-                moving = false;
+                _moving = false;
                 _destinationReached = true;
             }
         }

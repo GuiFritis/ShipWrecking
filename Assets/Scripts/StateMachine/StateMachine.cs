@@ -36,7 +36,7 @@ namespace StateMachine{
             _currentState.OnStateEnter(objs);
         }
 
-        private void Update()
+        public void OnUpdate()
         {
             if(_currentState != null)
             {

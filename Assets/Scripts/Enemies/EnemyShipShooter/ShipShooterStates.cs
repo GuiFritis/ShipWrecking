@@ -5,17 +5,78 @@ using StateMachine;
 
 namespace Enemy.ShipShooter
 {
-    public class ShipShooterStateBase : StateBase
+    public abstract class ShipShooterStateBase : StateBase
     {
         public EnemyShipShooter shipShooter;
-        public ShipShooterStateBase(EnemyShipShooter enemy)
+
+        public override void OnStateEnter(params object[] objs)
         {
-            shipShooter = enemy;
+            base.OnStateEnter(objs);
+            if(objs.Length > 0)
+            {
+                shipShooter = (EnemyShipShooter)objs[0];
+            }
         }
     }
 
     public class ShipShooterStateSleeping : ShipShooterStateBase
     {
-        public ShipShooterStateSleeping(EnemyShipShooter enemy) : base(enemy){}
+        public override void OnStateEnter(params object[] objs)
+        {
+            base.OnStateEnter(objs);
+            shipShooter.OnSleep();
+        }
+
+        public override void OnStateExit()
+        {
+            base.OnStateExit();
+            shipShooter.WakeUp();
+        }
+    }
+
+    public class ShipShooterStateShooting : ShipShooterStateBase
+    {
+        public override void OnStateEnter(params object[] objs)
+        {
+            base.OnStateEnter(objs);
+            shipShooter.StartShooting();
+        }
+
+        public override void OnStateStay()
+        {
+            base.OnStateStay();
+            shipShooter.Aim();
+        }
+
+        public override void OnStateExit()
+        {
+            base.OnStateExit();
+            shipShooter.StopShooting();
+        }
+    }
+
+    public class ShipShooterStateSeeking : ShipShooterStateBase
+    {
+        public override void OnStateEnter(params object[] objs)
+        {
+            base.OnStateEnter(objs);
+            shipShooter.StartSeeking();
+        }
+
+        public override void OnStateExit()
+        {
+            base.OnStateExit();
+            shipShooter.StopSeeking();
+        }
+    }
+
+    public class ShipShooterStateDead : ShipShooterStateBase
+    {
+        public override void OnStateEnter(params object[] objs)
+        {
+            base.OnStateEnter(objs);
+            shipShooter.OnSleep();
+            GameObject.Destroy(shipShooter.gameObject, 2f);
+        }
     }
 }

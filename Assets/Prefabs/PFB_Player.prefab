@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnDeath: 0
-  baseHealth: 10
+  baseHealth: 30
 --- !u!114 &8308601091339584455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,7 +300,6 @@ MonoBehaviour:
   - {fileID: 7955364937646895531}
   turnSpeed: 0.7
   friction: 5
-  moving: 0
   acceleration: 1
   maxSpeed: 2.5
   spriteSetups:
@@ -351,6 +350,10 @@ PrefabInstance:
     - target: {fileID: 1597054762873078083, guid: 882187669eaeb33439331c4f270844b3, type: 3}
       propertyPath: side
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1597054762873078083, guid: 882187669eaeb33439331c4f270844b3, type: 3}
+      propertyPath: cooldown
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2943315380967954627, guid: 882187669eaeb33439331c4f270844b3, type: 3}
       propertyPath: m_Name
@@ -433,6 +436,10 @@ PrefabInstance:
       propertyPath: side
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1597054762873078083, guid: 882187669eaeb33439331c4f270844b3, type: 3}
+      propertyPath: cooldown
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2943315380967954627, guid: 882187669eaeb33439331c4f270844b3, type: 3}
       propertyPath: m_Name
       value: Front
@@ -510,6 +517,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2338233780184393158}
     m_Modifications:
+    - target: {fileID: 1597054762873078083, guid: 882187669eaeb33439331c4f270844b3, type: 3}
+      propertyPath: cooldown
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2943315380967954627, guid: 882187669eaeb33439331c4f270844b3, type: 3}
       propertyPath: m_Name
       value: FrontCannon
@@ -586,6 +597,10 @@ PrefabInstance:
     - target: {fileID: 1597054762873078083, guid: 882187669eaeb33439331c4f270844b3, type: 3}
       propertyPath: side
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1597054762873078083, guid: 882187669eaeb33439331c4f270844b3, type: 3}
+      propertyPath: cooldown
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2943315380967954627, guid: 882187669eaeb33439331c4f270844b3, type: 3}
       propertyPath: m_Name
@@ -676,6 +691,10 @@ PrefabInstance:
       propertyPath: side
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1597054762873078083, guid: 882187669eaeb33439331c4f270844b3, type: 3}
+      propertyPath: cooldown
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2943315380967954627, guid: 882187669eaeb33439331c4f270844b3, type: 3}
       propertyPath: m_Name
       value: Middle
@@ -765,6 +784,10 @@ PrefabInstance:
       propertyPath: side
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1597054762873078083, guid: 882187669eaeb33439331c4f270844b3, type: 3}
+      propertyPath: cooldown
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2943315380967954627, guid: 882187669eaeb33439331c4f270844b3, type: 3}
       propertyPath: m_Name
       value: Middle
@@ -853,6 +876,10 @@ PrefabInstance:
     - target: {fileID: 1597054762873078083, guid: 882187669eaeb33439331c4f270844b3, type: 3}
       propertyPath: side
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1597054762873078083, guid: 882187669eaeb33439331c4f270844b3, type: 3}
+      propertyPath: cooldown
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2943315380967954627, guid: 882187669eaeb33439331c4f270844b3, type: 3}
       propertyPath: m_Name

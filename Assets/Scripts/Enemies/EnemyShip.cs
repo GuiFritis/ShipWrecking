@@ -8,6 +8,6 @@ namespace Enemy
     [RequireComponent(typeof(ShipBase))]
     public abstract class EnemyShip : EnemyBase
     {
-        public ShipBase ship;
+        public ShipSeeker ship;
     }   
 }

@@ -22,7 +22,7 @@ namespace Ship{
         protected float _speed = 0f;
         protected bool _moving = false;
 
-        void OnValidate()
+        protected virtual void OnValidate()
         {
             health = GetComponent<HealthBase>();
         }
@@ -92,6 +92,7 @@ namespace Ship{
                 if(hp.GetHealthPercentage() <= item.healthPercentage)
                 {
                     sprite = item.sprite;
+                    break;
                 }
             }
             spriteRenderer.sprite = sprite;

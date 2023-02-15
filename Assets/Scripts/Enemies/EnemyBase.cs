@@ -21,9 +21,10 @@ namespace Enemy
         protected virtual void Init()
         {
             health.ResetLife();
+            health.OnDeath += OnDeath;
         }
 
-        public virtual void OnDeath()
+        public virtual void OnDeath(HealthBase hp)
         {
             if(deathVFX != null)
             {

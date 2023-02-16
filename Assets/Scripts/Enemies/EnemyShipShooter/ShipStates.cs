@@ -3,80 +3,80 @@ using System.Collections.Generic;
 using UnityEngine;
 using StateMachine;
 
-namespace Enemy.ShipShooter
+namespace Enemy.EnemyShip
 {
-    public abstract class ShipShooterStateBase : StateBase
+    public abstract class ShipStateBase : StateBase
     {
-        public EnemyShipShooter shipShooter;
+        public EnemyShip enemyShip;
 
         public override void OnStateEnter(params object[] objs)
         {
             base.OnStateEnter(objs);
             if(objs.Length > 0)
             {
-                shipShooter = (EnemyShipShooter)objs[0];
+                enemyShip = (EnemyShip)objs[0];
             }
         }
     }
 
-    public class ShipShooterStateSleeping : ShipShooterStateBase
+    public class ShipStateSleeping : ShipStateBase
     {
         public override void OnStateEnter(params object[] objs)
         {
             base.OnStateEnter(objs);
-            shipShooter.OnSleep();
+            enemyShip.OnSleep();
         }
 
         public override void OnStateExit()
         {
             base.OnStateExit();
-            shipShooter.WakeUp();
+            enemyShip.WakeUp();
         }
     }
 
-    public class ShipShooterStateShooting : ShipShooterStateBase
+    public class ShipStateShooting : ShipStateBase
     {
         public override void OnStateEnter(params object[] objs)
         {
             base.OnStateEnter(objs);
-            shipShooter.StartShooting();
+            enemyShip.StartShooting();
         }
 
         public override void OnStateStay()
         {
             base.OnStateStay();
-            shipShooter.Aim();
+            enemyShip.Aim();
         }
 
         public override void OnStateExit()
         {
             base.OnStateExit();
-            shipShooter.StopShooting();
+            enemyShip.StopShooting();
         }
     }
 
-    public class ShipShooterStateSeeking : ShipShooterStateBase
+    public class ShipStateSeeking : ShipStateBase
     {
         public override void OnStateEnter(params object[] objs)
         {
             base.OnStateEnter(objs);
-            shipShooter.StartSeeking();
+            enemyShip.StartSeeking();
         }
 
         public override void OnStateExit()
         {
             base.OnStateExit();
-            shipShooter.StopSeeking();
+            enemyShip.StopSeeking();
         }
     }
 
-    public class ShipShooterStateDead : ShipShooterStateBase
+    public class ShipStateDead : ShipStateBase
     {
         public override void OnStateEnter(params object[] objs)
         {
             base.OnStateEnter(objs);
-            shipShooter.OnSleep();
-            GameObject.Destroy(shipShooter.gameObject, 2f);
+            enemyShip.OnSleep();
+            GameObject.Destroy(enemyShip.gameObject, 2f);
         }
     }
 }

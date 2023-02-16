@@ -4,9 +4,9 @@ using UnityEngine;
 using Ship;
 using StateMachine;
 
-namespace Enemy.ShipShooter
+namespace Enemy.EnemyShip
 {
-    public enum ShipShooterState
+    public enum EnemyShipState
     {
         SLEEPING,
         SEEKING,
@@ -14,44 +14,47 @@ namespace Enemy.ShipShooter
         DEAD
     }
 
-    public class EnemyShipShooter : EnemyShip
+    [RequireComponent(typeof(ShipSeeker))]
+    public class EnemyShip : EnemyBase
     {
+        public ShipSeeker ship;
         public Player player;
+        [Header("Seeking")]
+        public float timeToUpdatePath = 0.5f;
+        public float distanceToDestination = 4f;
         [Header("Shooting")]
-        public float distanceToShoot = 4f;
         public float maxDistanceToShoot = 5f;
         public float maxAngleToShoot = 10f;
-        [Space]
-        public float timeToUpdatePath = 0.5f;
 
         private bool _awake = false;
         private Coroutine _seekCoroutine;
-        private StateMachine<ShipShooterState> _stm;
+        private StateMachine<EnemyShipState> _stm;
         private float _maxSpeedBase;
 
         protected override void Init()
         {
             base.Init();
 
-            _stm = new StateMachine<ShipShooterState>();
+            _stm = new StateMachine<EnemyShipState>();
             _stm.Init();
-            _stm.RegisterStates(ShipShooterState.SLEEPING, new ShipShooterStateSleeping());
-            _stm.RegisterStates(ShipShooterState.SHOOTING, new ShipShooterStateShooting());
-            _stm.RegisterStates(ShipShooterState.SEEKING, new ShipShooterStateSeeking());
-            _stm.RegisterStates(ShipShooterState.DEAD, new ShipShooterStateDead());
+            _stm.RegisterStates(EnemyShipState.SLEEPING, new ShipStateSleeping());
+            _stm.RegisterStates(EnemyShipState.SHOOTING, new ShipStateShooting());
+            _stm.RegisterStates(EnemyShipState.SEEKING, new ShipStateSeeking());
+            _stm.RegisterStates(EnemyShipState.DEAD, new ShipStateDead());
 
-            SwitchState(ShipShooterState.SLEEPING);
+            SwitchState(EnemyShipState.SLEEPING);
 
-            ship.distanceToDestination = distanceToShoot;
+            ship.distanceToDestination = distanceToDestination;
             ship.target = player.transform;
             ship.onDestinationReached += OnDestinationReached;
 
-            player.ship.health.OnDeath += hp => SwitchState(ShipShooterState.SLEEPING);
+            player.ship.health.OnDeath += hp => SwitchState(EnemyShipState.SLEEPING);
         }
 
         void Start()
         {
-            SwitchState(ShipShooterState.SEEKING);
+            SwitchState(EnemyShipState.SEEKING);
+            _maxSpeedBase = player.ship.maxSpeed;
         }
 
         void Update() {
@@ -60,7 +63,7 @@ namespace Enemy.ShipShooter
 
         public override void Sleep()
         {
-            _stm.SwitchState(ShipShooterState.SLEEPING);
+            _stm.SwitchState(EnemyShipState.SLEEPING);
         }
 
         #region SLEEPING
@@ -78,20 +81,24 @@ namespace Enemy.ShipShooter
         #region SEEKING
         public void StartSeeking()
         {
+            Debug.Log("Start Seeking");
             _seekCoroutine = StartCoroutine(SeekPlayer());
         }
 
         private IEnumerator SeekPlayer()
         {
+            Debug.Log("Seek Player");
+            Debug.Log(_awake);
             while(_awake)
             {
                 ship.CalculatePath();
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(timeToUpdatePath);
             }
         }
 
         public void StopSeeking()
         {
+            Debug.Log("Stop Seeking");
             if(_seekCoroutine != null)
             {
                 StopCoroutine(_seekCoroutine);
@@ -102,11 +109,13 @@ namespace Enemy.ShipShooter
         #region SHOOTING
         public void StartShooting()
         {
+            Debug.Log("Start Shooting");
             ship.maxSpeed = player.ship.maxSpeed;
         }
 
         public void Aim()
         {
+            Debug.Log("Aiming");
             ship.LookAtLerped(player.transform.position);
             if(Vector2.Angle(transform.up * -1, (player.transform.position - transform.position).normalized) < maxAngleToShoot)
             {
@@ -119,12 +128,13 @@ namespace Enemy.ShipShooter
 
             if(Vector2.Distance(transform.position, player.transform.position) > maxDistanceToShoot)
             {
-                SwitchState(ShipShooterState.SEEKING);
+                SwitchState(EnemyShipState.SEEKING);
             }
         }
 
         public void StopShooting()
         {
+            Debug.Log("Stop Shooting");
             ship.maxSpeed = _maxSpeedBase;
         }
         #endregion
@@ -132,15 +142,15 @@ namespace Enemy.ShipShooter
         public override void OnDeath(HealthBase hp)
         {
             base.OnDeath(hp);
-            SwitchState(ShipShooterState.DEAD);
+            SwitchState(EnemyShipState.DEAD);
         }
 
         private void OnDestinationReached(ShipSeeker ship)
         {
-            SwitchState(ShipShooterState.SHOOTING);
+            SwitchState(EnemyShipState.SHOOTING);
         }
 
-        public void SwitchState(ShipShooterState state)
+        public void SwitchState(EnemyShipState state)
         {
             _stm.SwitchState(state, this);
         }

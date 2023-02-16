@@ -99,17 +99,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 8225020552716492189}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d325e2e977576441901923a94524ef5, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a5b045e17c681a4d81da5eaa0fa1673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 8225020552716492194}
   deathVFX: {fileID: 0}
   ship: {fileID: 8225020552716492198}
   player: {fileID: 0}
-  distanceToShoot: 5
+  timeToUpdatePath: 1
+  distanceToDestination: 4
   maxDistanceToShoot: 5
   maxAngleToShoot: 20
-  timeToUpdatePath: 1
 --- !u!114 &8225020552716492197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,13 +160,13 @@ MonoBehaviour:
   maxSpeed: 2.7
   spriteSetups:
   - healthPercentage: 100
-    sprite: {fileID: 21300000, guid: 40be07f09f94f604986f4d4003839e16, type: 3}
+    sprite: {fileID: 21300000, guid: 4a5a78efca36ae746acef623b513a6a4, type: 3}
   - healthPercentage: 50
-    sprite: {fileID: 21300000, guid: fb95e78637d67134a9c078607eafdb01, type: 3}
+    sprite: {fileID: 21300000, guid: 06c37a0b998835a4ca39dca0a88807f5, type: 3}
   - healthPercentage: 25
-    sprite: {fileID: 21300000, guid: e0f645d328c1072498768bf517c7259b, type: 3}
+    sprite: {fileID: 21300000, guid: 06c37a0b998835a4ca39dca0a88807f5, type: 3}
   - healthPercentage: 0
-    sprite: {fileID: 21300000, guid: 14d73d9e9026f994f8b6c729506eeedb, type: 3}
+    sprite: {fileID: 21300000, guid: 96c63c57e1e54b74caf55a0dacb15626, type: 3}
   seeker: {fileID: 8225020552716492197}
   target: {fileID: 0}
   distanceToNextWaypoint: 3
@@ -244,7 +244,7 @@ SpriteRenderer:
   m_SortingLayerID: 1354688391
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 40be07f09f94f604986f4d4003839e16, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4a5a78efca36ae746acef623b513a6a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -48,6 +48,7 @@ namespace Ship
             {
                 _path = path;
                 _currentWaypoint = 0;
+                _destinationReached = false;
             }
         }
 

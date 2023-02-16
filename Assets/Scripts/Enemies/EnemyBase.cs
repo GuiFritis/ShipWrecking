@@ -8,7 +8,6 @@ namespace Enemy
     public abstract class EnemyBase : MonoBehaviour
     {
         public HealthBase health;
-        public GameObject deathVFX;
 
         public abstract void WakeUp();
         public abstract void Sleep();
@@ -26,10 +25,7 @@ namespace Enemy
 
         public virtual void OnDeath(HealthBase hp)
         {
-            if(deathVFX != null)
-            {
-                Instantiate(deathVFX, transform.position, transform.rotation);
-            }
+            
         }
     }
 }

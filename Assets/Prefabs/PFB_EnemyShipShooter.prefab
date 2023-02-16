@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8225020552716492192}
   - component: {fileID: 8225020552716492197}
   - component: {fileID: 8225020552716492198}
+  - component: {fileID: 7376158151072181840}
   m_Layer: 7
   m_Name: PFB_EnemyShipShooter
   m_TagString: Untagged
@@ -89,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnDeath: 0
-  baseHealth: 10
+  baseHealth: 9
 --- !u!114 &8225020552716492192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,13 +104,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 8225020552716492194}
-  deathVFX: {fileID: 0}
   ship: {fileID: 8225020552716492198}
   player: {fileID: 0}
   timeToUpdatePath: 1
   distanceToDestination: 4
   maxDistanceToShoot: 5
-  maxAngleToShoot: 20
+  maxAngleToShoot: 60
 --- !u!114 &8225020552716492197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,13 +151,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 8225020552716492194}
+  collisionDamage: {fileID: 7376158151072181840}
   spriteRenderer: {fileID: 8225020552783538828}
   cannons:
   - {fileID: 8225020551326948972}
   turnSpeed: 1.5
   friction: 5
   acceleration: 2
-  maxSpeed: 2.7
+  maxSpeed: 3
   spriteSetups:
   - healthPercentage: 100
     sprite: {fileID: 21300000, guid: 4a5a78efca36ae746acef623b513a6a4, type: 3}
@@ -167,10 +168,30 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 06c37a0b998835a4ca39dca0a88807f5, type: 3}
   - healthPercentage: 0
     sprite: {fileID: 21300000, guid: 96c63c57e1e54b74caf55a0dacb15626, type: 3}
+  deathVFX: {fileID: 2464671007351807661, guid: f6fa6cbe7d217c548a78407a6b81cd4e, type: 3}
+  marginHitDamage: 0.8
   seeker: {fileID: 8225020552716492197}
   target: {fileID: 0}
   distanceToNextWaypoint: 3
   distanceToDestination: 5
+--- !u!114 &7376158151072181840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8225020552716492189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45c68bc5dbc775d4c9983e924af705de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 4
+  selfDamage: 4
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  health: {fileID: 8225020552716492194}
 --- !u!1 &8225020552783538826
 GameObject:
   m_ObjectHideFlags: 0

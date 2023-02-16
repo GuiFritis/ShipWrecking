@@ -75,8 +75,7 @@ namespace Enemy.EnemyShip
         public override void OnStateEnter(params object[] objs)
         {
             base.OnStateEnter(objs);
-            enemyShip.OnSleep();
-            GameObject.Destroy(enemyShip.gameObject, 2f);
+            enemyShip.Die();
         }
     }
 }

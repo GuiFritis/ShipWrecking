@@ -60,24 +60,23 @@ namespace Ship
 
                 LookAtLerped(_path.vectorPath[_currentWaypoint]);
 
-                if(Vector2.Distance(transform.position, _path.vectorPath[_currentWaypoint]) <= distanceToNextWaypoint)
+                if(_currentWaypoint < _path.vectorPath.Count - 1)
                 {
-                    _currentWaypoint++;
-                }
-
+                    if(Vector2.Distance(transform.position, _path.vectorPath[_currentWaypoint]) <= distanceToNextWaypoint)
+                    {
+                        _currentWaypoint++;
+                    }
+                } 
+                
                 if(Vector2.Distance(transform.position, _path.vectorPath[_path.vectorPath.Count-1]) <= distanceToDestination)
                 {
                     DestinationReached();
                 }
-                else
-                {
-                    _moving = true;
-                }
+
             }
             else
             {
-                _moving = false;
-                _destinationReached = true;
+                DestinationReached();
             }
         }
 

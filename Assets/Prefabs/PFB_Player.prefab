@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 8308601091339584455}
   - component: {fileID: 8308601091339584452}
   - component: {fileID: 1235170376}
+  - component: {fileID: 3295127968631529109}
   m_Layer: 6
   m_Name: PFB_Player
   m_TagString: Untagged
@@ -275,7 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnDeath: 0
-  baseHealth: 30
+  baseHealth: 20
 --- !u!114 &8308601091339584455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,6 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 8308601091339584454}
+  collisionDamage: {fileID: 3295127968631529109}
   spriteRenderer: {fileID: 8308601089971069861}
   cannons:
   - {fileID: 4379855717396207319}
@@ -311,6 +313,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 10bc9067714969c478b38e0e04f91103, type: 3}
   - healthPercentage: 100
     sprite: {fileID: 21300000, guid: 8d5990ea9e18dfc4ebea16b3596310fd, type: 3}
+  marginHitDamage: 0.8
 --- !u!114 &8308601091339584452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,6 +343,24 @@ MonoBehaviour:
   fogTag: Fog
   fogView: 3.5
   transitionTime: 0.7
+--- !u!114 &3295127968631529109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8308601091339584448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45c68bc5dbc775d4c9983e924af705de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+  selfDamage: 2
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  health: {fileID: 8308601091339584454}
 --- !u!1001 &217685140948563247
 PrefabInstance:
   m_ObjectHideFlags: 0

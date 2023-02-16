@@ -20,6 +20,7 @@ namespace Enemy.EnemyShip
         public ShipSeeker ship;
         public Player player;
         [Header("Seeking")]
+        [Min(0.2f)]
         public float timeToUpdatePath = 0.5f;
         public float distanceToDestination = 4f;
         [Header("Shooting")]
@@ -70,6 +71,7 @@ namespace Enemy.EnemyShip
         public void OnSleep()
         {            
             _awake = false;
+            ship.SetMoving(false);
         }
 
         public override void WakeUp()
@@ -81,14 +83,12 @@ namespace Enemy.EnemyShip
         #region SEEKING
         public void StartSeeking()
         {
-            Debug.Log("Start Seeking");
+            ship.SetMoving(true);
             _seekCoroutine = StartCoroutine(SeekPlayer());
         }
 
         private IEnumerator SeekPlayer()
         {
-            Debug.Log("Seek Player");
-            Debug.Log(_awake);
             while(_awake)
             {
                 ship.CalculatePath();
@@ -98,26 +98,25 @@ namespace Enemy.EnemyShip
 
         public void StopSeeking()
         {
-            Debug.Log("Stop Seeking");
             if(_seekCoroutine != null)
             {
                 StopCoroutine(_seekCoroutine);
             }
+            ship.SetMoving(false);
         }
         #endregion
 
         #region SHOOTING
         public void StartShooting()
         {
-            Debug.Log("Start Shooting");
             ship.maxSpeed = player.ship.maxSpeed;
         }
 
         public void Aim()
         {
-            Debug.Log("Aiming");
             ship.LookAtLerped(player.transform.position);
-            if(Vector2.Angle(transform.up * -1, (player.transform.position - transform.position).normalized) < maxAngleToShoot)
+            if(Vector2.Angle(transform.up * -1, (player.transform.position - transform.position).normalized) < maxAngleToShoot
+                && ship.cannons.Count > 0)
             {
                 var direction = player.transform.position - transform.position;
                 direction.Normalize();
@@ -134,8 +133,26 @@ namespace Enemy.EnemyShip
 
         public void StopShooting()
         {
-            Debug.Log("Stop Shooting");
             ship.maxSpeed = _maxSpeedBase;
+        }
+        #endregion
+
+        #region DEAD
+        public void Die()
+        {
+            OnSleep();
+            GetComponent<Collider2D>().enabled = false;
+            StartCoroutine(AnimateDeath());
+        }
+
+        private IEnumerator AnimateDeath()
+        {
+            while(transform.localScale.magnitude > 1.2f)
+            {
+                transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, Time.deltaTime * 0.1f);
+                yield return new WaitForEndOfFrame();
+            }
+            Destroy(gameObject);
         }
         #endregion
 
@@ -147,7 +164,10 @@ namespace Enemy.EnemyShip
 
         private void OnDestinationReached(ShipSeeker ship)
         {
-            SwitchState(EnemyShipState.SHOOTING);
+            if(_stm.CurrentState.GetType() != typeof(ShipStateShooting))
+            {
+                SwitchState(EnemyShipState.SHOOTING);
+            }
         }
 
         public void SwitchState(EnemyShipState state)

@@ -4,10 +4,11 @@ using UnityEngine;
 using Cannon;
 
 namespace Ship{
-    [RequireComponent(typeof(Rigidbody2D), typeof(HealthBase))]
+    [RequireComponent(typeof(Rigidbody2D), typeof(HealthBase), typeof(CollisionDamage))]
     public class ShipBase : MonoBehaviour
     {
         public HealthBase health;
+        public CollisionDamage collisionDamage;
         public SpriteRenderer spriteRenderer;
         [Space]
         public List<CannonBase> cannons = new List<CannonBase>();
@@ -18,6 +19,11 @@ namespace Ship{
         public float maxSpeed = 2.5f;
         [Header("Art")]
         public List<SetupSpriteByHealth> spriteSetups;
+        public GameObject deathVFX;
+        [Space]
+        [Tooltip("The margin at wich the collision deals self damage")]
+        [Range(0f, 1f)]
+        public float marginHitDamage = 0.8f;
 
         protected float _speed = 0f;
         protected bool _moving = false;
@@ -25,6 +31,7 @@ namespace Ship{
         protected virtual void OnValidate()
         {
             health = GetComponent<HealthBase>();
+            collisionDamage = GetComponent<CollisionDamage>();
         }
 
         void Awake()
@@ -36,6 +43,7 @@ namespace Ship{
         private void Init()
         {
             health.OnDamage += OnDamage;
+            health.OnDeath += OnDeath;
             OrderSpriteSetups();
         }
 
@@ -44,6 +52,11 @@ namespace Ship{
             spriteSetups.Sort((i, z) => i.healthPercentage - z.healthPercentage);
         }
         #endregion
+
+        void Start()
+        {
+            collisionDamage.validateDamage += DamageIfMaxSpeed;
+        }
 
         void Update()
         {
@@ -101,6 +114,23 @@ namespace Ship{
         public void SetMoving(bool moving)
         {
             _moving = moving;
+        }
+
+        public bool DamageIfMaxSpeed(GameObject other)
+        {
+            return _speed >= maxSpeed * marginHitDamage;
+        }
+
+        public void OnDeath(HealthBase hp)
+        {
+            if(deathVFX != null)
+            {
+                Instantiate(deathVFX, transform.position, transform.rotation);
+            }
+            _moving = false;
+            maxSpeed = 0f;
+            turnSpeed = 0f;
+            cannons.Clear();
         }
     }
 }

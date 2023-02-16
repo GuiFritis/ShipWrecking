@@ -8,6 +8,7 @@ namespace Enemy
     public abstract class EnemyBase : MonoBehaviour
     {
         public HealthBase health;
+        public Player player;
 
         public abstract void WakeUp();
         public abstract void Sleep();

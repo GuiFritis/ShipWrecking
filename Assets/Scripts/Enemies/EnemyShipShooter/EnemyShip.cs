@@ -18,7 +18,6 @@ namespace Enemy.EnemyShip
     public class EnemyShip : EnemyBase
     {
         public ShipSeeker ship;
-        public Player player;
         [Header("Seeking")]
         [Min(0.2f)]
         public float timeToUpdatePath = 0.5f;
@@ -44,18 +43,19 @@ namespace Enemy.EnemyShip
             _stm.RegisterStates(EnemyShipState.DEAD, new ShipStateDead());
 
             SwitchState(EnemyShipState.SLEEPING);
+        }
 
+        void Start()
+        {
             ship.distanceToDestination = distanceToDestination;
             ship.target = player.transform;
             ship.onDestinationReached += OnDestinationReached;
 
             player.ship.health.OnDeath += hp => SwitchState(EnemyShipState.SLEEPING);
-        }
 
-        void Start()
-        {
+            _maxSpeedBase = player.ship.maxSpeed; 
             SwitchState(EnemyShipState.SEEKING);
-            _maxSpeedBase = player.ship.maxSpeed;
+            
         }
 
         void Update() {

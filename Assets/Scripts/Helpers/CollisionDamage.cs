@@ -28,7 +28,11 @@ public class CollisionDamage : MonoBehaviour
     {
         if(validateDamage.Invoke(other.gameObject))
         {
-            other.gameObject.GetComponent<HealthBase>().TakeDamage(damage);
+            HealthBase hp = other.gameObject.GetComponent<HealthBase>();
+            if(hp != null)
+            {
+                hp.TakeDamage(damage);
+            }
             if(health != null)
             {
                 health.TakeDamage(selfDamage);

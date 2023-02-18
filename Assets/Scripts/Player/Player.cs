@@ -43,6 +43,16 @@ public class Player : MonoBehaviour
         _inputs.Gameplay_PC.SideShoot.performed += ctx => SideCannons();
     }
 
+    public void Pause()
+    {
+        _inputs.Disable();
+    }
+
+    public void Unpause()
+    {
+        _inputs.Enable();
+    }
+
     #region MOVE
     private void Move()
     {

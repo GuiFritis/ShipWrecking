@@ -8,6 +8,7 @@ using Ship;
 public class Player : MonoBehaviour
 {
     public ShipBase ship;
+    public UIFillUpdater healthUI;
 
     private Inputs _inputs;
     private bool _turning;
@@ -24,6 +25,8 @@ public class Player : MonoBehaviour
 
     private void Init()
     {
+        ship.health.OnDamage += UpdateHealthUI;
+
         ship.health.ResetLife();
 
         _inputs = new Inputs();
@@ -51,6 +54,11 @@ public class Player : MonoBehaviour
     public void Unpause()
     {
         _inputs.Enable();
+    }
+
+    private void UpdateHealthUI(HealthBase hp)
+    {
+        healthUI.UpdateValue(hp.GetCurHealth()/hp.baseHealth);
     }
 
     #region MOVE

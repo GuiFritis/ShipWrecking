@@ -9,14 +9,19 @@ public class SOFloatUpdate : MonoBehaviour
     public string prefixText;
     public string sufixText;
     public TextMeshProUGUI UITextValue;
+    
+    void OnValidate()
+    {
+        UITextValue = GetComponent<TextMeshProUGUI>();
+    }
 
     void Start()
     {
         soFloat.OnValueChanged += UpdateText;
-        UITextValue.text = prefixText + soFloat.Value.ToString() + sufixText;
+        UpdateText(soFloat.Value);
     }
 
-    void UpdateText(float i)
+    protected virtual void UpdateText(float i)
     {
         UITextValue.text = prefixText + soFloat.Value.ToString("n1") + sufixText;
     }

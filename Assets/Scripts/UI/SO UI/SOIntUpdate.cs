@@ -10,6 +10,11 @@ public class SOIntUpdate : MonoBehaviour
     public string sufixText;
     public TextMeshProUGUI UITextValue;
 
+    void OnValidate()
+    {
+        UITextValue = GetComponent<TextMeshProUGUI>();
+    }
+
     void Start()
     {
         soInt.OnValueChanged += UpdateText;

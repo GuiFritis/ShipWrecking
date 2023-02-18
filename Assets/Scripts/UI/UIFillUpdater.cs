@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class UIFillUpdater : MonoBehaviour
 {
     public Image uiImage;
-    public float duration = .1f;
 
     private void OnValidate()
     {

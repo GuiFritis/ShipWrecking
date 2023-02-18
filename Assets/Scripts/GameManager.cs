@@ -9,13 +9,17 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public Player player;
-    public Vector2 enemySpawnPerimeter = Vector2.one;
     [Header("Enemies")]
+    public Vector2 enemySpawnPerimeter = Vector2.one;
     public List<EnemyBase> enemies = new List<EnemyBase>();
     public LayerMask overlapingEnemiesLayers;
     public int maxEnemiesSpawned = 6;
     public SOFloat timeToSpawnEnemy;
+    [Space]
     public SOInt roundDuration;
+    public SOFloat roundTime;
+    public SOInt score;
+    [Space]
     public InputActionReference menuKey;
 
     private Vector2 _spawnPosition = Vector2.one;
@@ -32,9 +36,12 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
-        
+
         menuKey.action.Enable();
         menuKey.action.performed += ctx => CallMenu();
+
+        score.Value = 0;
+        roundTime.Value = 0f;
     }
 
     void OnValidate()
@@ -48,8 +55,18 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        StartGame();
+    }
+
+    private void StartGame()
+    {
         player.ship.health.OnDeath += PlayerDied;
         StartCoroutine(EnemySpawning());
+    }
+
+    void Update()
+    {
+        CheckEndGame();
     }
 
     private void CallMenu()
@@ -68,18 +85,25 @@ public class GameManager : MonoBehaviour
 
     private void PlayerDied(HealthBase hp)
     {
-
+        CallEndGame();
     }
 
     #region END_GAME
-    private IEnumerator CountRound()
+    private void CheckEndGame()
     {
-        float roundTimer = 0f;
-        while(roundTimer < roundDuration.Value)
+        roundTime.Value += Time.deltaTime;
+        if(roundTime.Value >= roundDuration.Value)
         {
-            roundTimer ++;
-            yield return new WaitForSeconds(1f);
+            CallEndGame();
         }
+    }
+
+    private void CallEndGame()
+    {
+        menuKey.action.Disable();
+        PauseGame();
+        ScreenController.Instance.HideAllScreens();
+        ScreenController.Instance.ShowScreen(GameplayScreenType.GAME_OVER);
     }
     #endregion
 

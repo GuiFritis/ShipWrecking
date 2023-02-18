@@ -16,16 +16,18 @@ namespace Cannon
     public class CannonBase : MonoBehaviour
     {
         public CannonSide side;
-        public GameObject cannonBall_pfb;
+        public CannonBallBase cannonBall_pfb;
         public float cooldown = 2f;
 
         private bool _onCooldown;
+        private CannonBallBase _cannonBall;
 
-        public void Shoot()
+        public void Shoot(IKiller shooter = null)
         {
             if(!_onCooldown)
             {
-                Instantiate(cannonBall_pfb, transform.position, transform.rotation);
+                _cannonBall = Instantiate(cannonBall_pfb, transform.position, transform.rotation);
+                _cannonBall.shooter = shooter;
                 _onCooldown = true;
                 StartCoroutine(StartCooldown());
             }

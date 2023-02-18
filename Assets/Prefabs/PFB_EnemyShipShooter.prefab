@@ -91,6 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyOnDeath: 0
   baseHealth: 9
+  scorePoints: 15
 --- !u!114 &8225020552716492192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,8 +105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 8225020552716492194}
-  ship: {fileID: 8225020552716492198}
   player: {fileID: 0}
+  ship: {fileID: 8225020552716492198}
   timeToUpdatePath: 1
   distanceToDestination: 4
   maxDistanceToShoot: 5

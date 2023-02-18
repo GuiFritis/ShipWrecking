@@ -83,7 +83,7 @@ namespace Ship{
             transform.Rotate(Vector3.forward * turnSpeed * direction);
         }
 
-        public void ShootCannon(CannonSide side)
+        public void ShootCannon(CannonSide side, IKiller shooter = null)
         {
             if(cannons.Count > 0)
             {
@@ -91,7 +91,7 @@ namespace Ship{
                 {
                     if(item.side == side)
                     {
-                        item.Shoot();
+                        item.Shoot(shooter);
                     }
                 }
             }

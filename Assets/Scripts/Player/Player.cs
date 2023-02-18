@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using Ship;
 
 [RequireComponent(typeof(ShipBase))]
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IKiller
 {
     public ShipBase ship;
     public UIFillUpdater healthUI;
@@ -61,6 +61,11 @@ public class Player : MonoBehaviour
         healthUI.UpdateValue(hp.GetCurHealth()/hp.baseHealth);
     }
 
+    public void OnKill(HealthBase hp)
+    {
+        GameManager.Instance.score.Value += hp.scorePoints;
+    }
+
     #region MOVE
     private void Move()
     {
@@ -98,17 +103,17 @@ public class Player : MonoBehaviour
     #region CANNONS
     private void FrontCannons()
     {
-        ship.ShootCannon(Cannon.CannonSide.FRONT);
+        ship.ShootCannon(Cannon.CannonSide.FRONT, this);
     }
 
     private void LeftSideCannons()
     {
-        ship.ShootCannon(Cannon.CannonSide.LEFT);
+        ship.ShootCannon(Cannon.CannonSide.LEFT, this);
     }
 
     private void RightSideCannons()
     {
-        ship.ShootCannon(Cannon.CannonSide.RIGHT);
+        ship.ShootCannon(Cannon.CannonSide.RIGHT, this);
     }
 
     private void SideCannons()

@@ -9,6 +9,7 @@ public class HealthBase : MonoBehaviour
     public Action<HealthBase> OnDeath;
     public bool destroyOnDeath = false;
     public float baseHealth = 10f;
+    public int scorePoints = 0;
 
     private float _curHealth;
     private bool dead = false;
@@ -35,12 +36,16 @@ public class HealthBase : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, IKiller killer = null)
     {
         _curHealth -= damage;
         OnDamage?.Invoke(this);
         if(_curHealth <= 0 && !dead)
         {
+            if(killer != null)
+            {
+                killer.OnKill(this);
+            }
             Death();
         }
     }

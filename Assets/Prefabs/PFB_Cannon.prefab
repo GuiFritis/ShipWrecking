@@ -97,5 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609ea3887ff060a46becf42236bce8fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cannonBall_pfb: {fileID: 5799792532789061758, guid: 4c353bbac831a9c48b0c935ba005c7ff, type: 3}
+  side: 0
+  cannonBall_pfb: {fileID: 5799792532789061759, guid: 4c353bbac831a9c48b0c935ba005c7ff, type: 3}
   cooldown: 2

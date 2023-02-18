@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviour
 
     private void CallEndGame()
     {
+        Save.SaveManager.Instance.SaveScore();
         menuKey.action.Disable();
         PauseGame();
         ScreenController.Instance.HideAllScreens();
@@ -112,8 +113,8 @@ public class GameManager : MonoBehaviour
     {
         while(player.ship.health.GetCurHealth() > 0)
         {
-            SpawnEnemy();
             yield return new WaitForSeconds(timeToSpawnEnemy.Value);
+            SpawnEnemy();
         }
     }
 

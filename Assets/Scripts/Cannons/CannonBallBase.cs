@@ -11,6 +11,7 @@ public class CannonBallBase : MonoBehaviour
     public float damage = 10f;
     public GameObject hit_vfx;
     public LayerMask hitLayer;
+    public IKiller shooter;
 
     void OnValidate()
     {
@@ -34,7 +35,7 @@ public class CannonBallBase : MonoBehaviour
             HealthBase hp = other.GetComponent<HealthBase>();
             if(hp != null)
             {
-                hp.TakeDamage(damage);
+                hp.TakeDamage(damage, shooter);
             }
 
             if(hit_vfx != null)

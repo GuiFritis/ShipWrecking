@@ -18,5 +18,6 @@ public class SOFloat : ScriptableObject
         }
     }
 
+    [SerializeField]
     private float _value;
 }

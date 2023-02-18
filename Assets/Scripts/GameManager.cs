@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Enemy;
 using Screens;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     public int maxEnemiesSpawned = 6;
     public SOFloat timeToSpawnEnemy;
     public SOInt roundDuration;
+    public InputActionReference menuKey;
 
     private Vector2 _spawnPosition = Vector2.one;
     private EnemyBase _enemy;
@@ -30,6 +32,9 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+        
+        menuKey.action.Enable();
+        menuKey.action.performed += ctx => CallMenu();
     }
 
     void OnValidate()

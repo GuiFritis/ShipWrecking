@@ -18,5 +18,6 @@ public class SOInt : ScriptableObject
         }
     }
 
+    [SerializeField]
     private int _value;
 }

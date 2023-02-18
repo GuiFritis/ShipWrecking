@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d9119901cc3414cae1ad815152cdca, type: 3}
   m_Name: RoundDuration
   m_EditorClassIdentifier: 
+  _value: 60

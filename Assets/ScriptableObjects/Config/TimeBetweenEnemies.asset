@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d65faeba49182246ac92dce912a8178, type: 3}
   m_Name: TimeBetweenEnemies
   m_EditorClassIdentifier: 
+  _value: 3

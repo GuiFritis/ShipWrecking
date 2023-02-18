@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
             _spawnPosition = GetRandomPointInPerimeter();
         }
 
-        _enemy = Instantiate(enemies[Random.Range(0, enemies.Count-1)], _spawnPosition, Quaternion.identity);
+        _enemy = Instantiate(enemies[Random.Range(0, enemies.Count)], _spawnPosition, Quaternion.identity);
         _enemiesSpawned++;
 
         _enemy.player = player;

@@ -8,7 +8,7 @@ using Ship;
 public class Player : MonoBehaviour, IKiller
 {
     public ShipBase ship;
-    public UIFillUpdater healthUI;
+    public UIFillUpdater uiHealth;
 
     private Inputs _inputs;
     private bool _turning;
@@ -58,7 +58,7 @@ public class Player : MonoBehaviour, IKiller
 
     private void UpdateHealthUI(HealthBase hp)
     {
-        healthUI.UpdateValue(hp.GetCurHealth()/hp.baseHealth);
+        uiHealth.UpdateValue(hp.GetCurHealth()/hp.baseHealth);
     }
 
     public void OnKill(HealthBase hp)

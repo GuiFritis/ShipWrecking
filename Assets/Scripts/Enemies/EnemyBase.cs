@@ -9,6 +9,7 @@ namespace Enemy
     {
         public HealthBase health;
         public Player player;
+        public UIFillUpdater uiHealth;
 
         public abstract void WakeUp();
         public abstract void Sleep();
@@ -22,11 +23,20 @@ namespace Enemy
         {
             health.ResetLife();
             health.OnDeath += OnDeath;
+            health.OnDamage += OnDamage;
         }
 
         public virtual void OnDeath(HealthBase hp)
         {
             
+        }
+
+        public virtual void OnDamage(HealthBase hp)
+        {
+            if(uiHealth != null)
+            {
+                uiHealth.UpdateValue(hp.GetCurHealth()/hp.baseHealth);
+            }
         }
     }
 }

@@ -100,7 +100,6 @@ public class GameManager : MonoBehaviour
 
     private void CallEndGame()
     {
-        Save.SaveManager.Instance.SaveScore();
         menuKey.action.Disable();
         PauseGame();
         ScreenController.Instance.HideAllScreens();

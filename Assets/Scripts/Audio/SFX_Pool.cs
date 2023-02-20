@@ -19,11 +19,6 @@ namespace Sounds
             }
         }
 
-        protected override void Awake()
-        {
-            base.Awake();
-        }
-
         public void Play(AudioClip clip)
         {
             if(clip != null)

@@ -46,20 +46,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   side: 0
-  cannonBall_pfb: {fileID: 5799792532789061759, guid: 45dd7d310393f264c8a531dcf7b0b2f4, type: 3}
-  shot_vfx: {fileID: 0}
-  shot_sfxs:
-  - {fileID: 8300000, guid: 8524588a69a4f3e40bb597b6221138f1, type: 3}
-  - {fileID: 8300000, guid: fc96116dc3c141440aabb5605744fea2, type: 3}
-  - {fileID: 8300000, guid: c401d00c96b512e488d2e3bf5d111509, type: 3}
-  - {fileID: 8300000, guid: c2153dcd0edd22f40bdebf613271bae7, type: 3}
-  - {fileID: 8300000, guid: 8b3f676fe7b41044495a2964396b8ba3, type: 3}
-  - {fileID: 8300000, guid: f01c623f724825e44a923d1ae50256f2, type: 3}
-  - {fileID: 8300000, guid: fd706038486fee041947a774223dc22e, type: 3}
-  - {fileID: 8300000, guid: c1f8c36ebdb20024ea8a59ec457d582c, type: 3}
-  - {fileID: 8300000, guid: f0bba60dd1813bd40af826dbaa99b983, type: 3}
-  - {fileID: 8300000, guid: d4aee29185389894b9cc0d8873904a49, type: 3}
+  shot_vfx: {fileID: 5680584046164392919, guid: 82279bd73fc8d7e449383a0156650263, type: 3}
   cooldown: 2
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 576
+  damage: 3
 --- !u!212 &7022743178337761338
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -100,7 +92,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1354688391
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: a30e0fe45f4299946803d17712b3cfe1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

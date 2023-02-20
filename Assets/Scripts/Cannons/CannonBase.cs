@@ -16,9 +16,10 @@ namespace Cannon
     public class CannonBase : MonoBehaviour
     {
         public CannonSide side;
-        public CannonBallBase cannonBall_pfb;
         public GameObject shot_vfx;
         public float cooldown = 2f;
+        public LayerMask hitLayer;
+        public float damage;
 
         private bool _onCooldown;
         private CannonBallBase _cannonBall;
@@ -31,8 +32,10 @@ namespace Cannon
                 {
                     Instantiate(shot_vfx, transform.position, transform.rotation);
                 }
-                _cannonBall = Instantiate(cannonBall_pfb, transform.position, transform.rotation);
-                _cannonBall.shooter = shooter;
+                _cannonBall = CannonBallPooling.Instance.GetPoolItem();
+
+                _cannonBall.Shoot(transform, hitLayer, shooter, damage);
+
                 _onCooldown = true;
                 StartCoroutine(StartCooldown());
             }

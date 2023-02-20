@@ -17,6 +17,7 @@ namespace Cannon
     {
         public CannonSide side;
         public CannonBallBase cannonBall_pfb;
+        public GameObject shoot_vfx;
         public float cooldown = 2f;
 
         private bool _onCooldown;
@@ -26,6 +27,10 @@ namespace Cannon
         {
             if(!_onCooldown)
             {
+                if(shoot_vfx != null)
+                {
+                    Instantiate(shoot_vfx, transform.position, transform.rotation);
+                }
                 _cannonBall = Instantiate(cannonBall_pfb, transform.position, transform.rotation);
                 _cannonBall.shooter = shooter;
                 _onCooldown = true;

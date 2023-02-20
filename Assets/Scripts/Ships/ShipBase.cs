@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cannon;
+using Sounds;
 
 namespace Ship{
     [RequireComponent(typeof(Rigidbody2D), typeof(HealthBase), typeof(CollisionDamage))]
@@ -10,8 +11,9 @@ namespace Ship{
         public HealthBase health;
         public CollisionDamage collisionDamage;
         public SpriteRenderer spriteRenderer;
-        [Space]
+        [Header("Cannons")]
         public List<CannonBase> cannons = new List<CannonBase>();
+        public List<AudioClip> shot_sfxs;
         [Header("Movement")]
         public float turnSpeed = 1f;
         public float friction = 5f;
@@ -87,6 +89,11 @@ namespace Ship{
         {
             if(cannons.Count > 0)
             {
+                if(shot_sfxs.Count > 0 && !cannons.Find(i => i.side == side).IsOnCooldown())
+                {
+                    SFX_Pool.Instance.Play(shot_sfxs[Random.Range(0, shot_sfxs.Count)]);
+                }
+                
                 foreach (var item in cannons)
                 {
                     if(item.side == side)
@@ -94,6 +101,7 @@ namespace Ship{
                         item.Shoot(shooter);
                     }
                 }
+                
             }
         }
 

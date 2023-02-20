@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyOnDeath: 1
   baseHealth: 10
+  scorePoints: 5
 --- !u!114 &629590959236844957
 MonoBehaviour:
   m_ObjectHideFlags: 0

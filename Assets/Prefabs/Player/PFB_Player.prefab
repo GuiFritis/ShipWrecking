@@ -669,7 +669,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cinemachine: {fileID: 0}
   fogTag: Fog
-  fogView: 3.5
+  fogView: 4
   transitionTime: 0.7
 --- !u!114 &3295127968631529109
 MonoBehaviour:

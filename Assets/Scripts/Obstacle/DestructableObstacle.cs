@@ -24,12 +24,19 @@ public class DestructableObstacle : MonoBehaviour
     {
         health.ResetLife();
         health.OnDamage += OnDamage;
+        health.OnDeath += OnDeath;
         OrderSpriteSetups();
     }
 
     private void OrderSpriteSetups()
     {
         spriteSetups.Sort((i, z) => z.healthPercentage - i.healthPercentage);
+    }
+
+    private void OnDeath(HealthBase hp)
+    {
+        gameObject.SetActive(false);
+        AstarPath.active.Scan();
     }
 
     private void OnDamage(HealthBase hp)

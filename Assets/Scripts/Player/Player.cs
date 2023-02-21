@@ -12,10 +12,24 @@ public class Player : MonoBehaviour, IKiller
 
     private Inputs _inputs;
     private bool _turning;
+    [SerializeField]
+    private float _turnSpeedBase;
+    [SerializeField]
+    private float _accelerationBase;
+    [SerializeField]
+    private float _maxSpeedBase;
+
 
     void OnValidate()
     {
         ship = GetComponent<ShipBase>();
+
+        if(ship != null)
+        {
+            _turnSpeedBase = ship.turnSpeed;
+            _accelerationBase = ship.acceleration;
+            _maxSpeedBase = ship.maxSpeed;
+        }
     }
 
     void Awake()
@@ -28,6 +42,10 @@ public class Player : MonoBehaviour, IKiller
         ship.health.OnDamage += UpdateHealthUI;
 
         ship.health.ResetLife();
+
+        ship.turnSpeed = _turnSpeedBase;
+        ship.acceleration = _accelerationBase;
+        ship.maxSpeed = _maxSpeedBase;
 
         _inputs = new Inputs();
         _inputs.Enable();

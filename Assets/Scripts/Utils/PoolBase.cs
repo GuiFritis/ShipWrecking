@@ -30,8 +30,8 @@ public abstract class PoolBase<T> : MonoBehaviour where T : Behaviour
 
     private void CreatePoolItem()
     {
-        GameObject obj = Instantiate(PFB_item.gameObject, gameObject.transform);
-        _pool.Add(obj.AddComponent<T>());
+        T item = Instantiate(PFB_item, gameObject.transform);
+        _pool.Add(item);
     }
 
     public T GetPoolItem()

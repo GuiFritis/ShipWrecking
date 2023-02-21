@@ -19,12 +19,11 @@ public class GameManager : MonoBehaviour
     public SOInt roundDuration;
     public SOFloat roundTime;
     public SOInt score;
-    [Space]
-    public InputActionReference menuKey;
 
     private Vector2 _spawnPosition = Vector2.one;
     private EnemyBase _enemy;
     private int _enemiesSpawned = 0;
+    private Inputs _inputs;
 
     void Awake()
     {
@@ -37,8 +36,9 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
 
-        menuKey.action.Enable();
-        menuKey.action.performed += ctx => CallMenu();
+        _inputs = new Inputs();
+        _inputs.Enable();
+        _inputs.Gameplay_PC.CallMenu.performed += ctx => CallMenu();
 
         score.Value = 0;
         roundTime.Value = 0f;
@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
 
     private void CallMenu()
     {
+        Debug.Log("TESTE");
         if(Time.timeScale == 0)
         {
             UnpauseGame();
@@ -100,7 +101,7 @@ public class GameManager : MonoBehaviour
 
     private void CallEndGame()
     {
-        menuKey.action.Disable();
+        _inputs.Disable();
         PauseGame();
         ScreenController.Instance.HideAllScreens();
         ScreenController.Instance.ShowScreen(GameplayScreenType.GAME_OVER);

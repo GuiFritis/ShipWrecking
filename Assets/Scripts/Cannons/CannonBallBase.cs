@@ -13,6 +13,7 @@ public class CannonBallBase : MonoBehaviour
     public LayerMask hitLayer;
     public IKiller shooter;
 
+    [SerializeField]
     private TrailRenderer _trail;
 
     void OnValidate()
@@ -35,7 +36,7 @@ public class CannonBallBase : MonoBehaviour
         this.shooter = shooter;
         this.damage = damage;
         
-        _trail.Clear();
+        _trail?.Clear();
 
         gameObject.SetActive(true);
         Invoke(nameof(Disable), lifeTime);

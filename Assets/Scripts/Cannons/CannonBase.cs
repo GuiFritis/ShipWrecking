@@ -28,6 +28,8 @@ namespace Cannon
         {
             if(!_onCooldown)
             {
+                _onCooldown = true;
+
                 if(shot_vfx != null)
                 {
                     Instantiate(shot_vfx, transform.position, transform.rotation);
@@ -36,8 +38,7 @@ namespace Cannon
 
                 _cannonBall.Shoot(transform, hitLayer, shooter, damage);
 
-                _onCooldown = true;
-                StartCoroutine(StartCooldown());
+                Invoke(nameof(ResetCooldown), cooldown);
             }
         }
 
@@ -46,9 +47,8 @@ namespace Cannon
             return _onCooldown;
         }
 
-        private IEnumerator StartCooldown()
+        private void ResetCooldown()
         {
-            yield return new WaitForSeconds(cooldown);
             _onCooldown = false;
         }
     }

@@ -353,7 +353,7 @@ MonoBehaviour:
   turnSpeed: 1.5
   friction: 5
   acceleration: 2
-  maxSpeed: 3.4
+  maxSpeed: 3.2
   spriteSetups:
   - healthPercentage: 100
     sprite: {fileID: 21300000, guid: 40be07f09f94f604986f4d4003839e16, type: 3}
